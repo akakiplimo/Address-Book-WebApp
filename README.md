@@ -17,6 +17,6 @@
 
 3. Run Flask using the code below and you should be good to go
    
-   ```shell
+  ```shell
    $ flask run
    ```
