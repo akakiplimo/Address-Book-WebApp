@@ -46,6 +46,16 @@ def Index():
         # return {"count": len(results), "contacts": results}
         return render_template('index.html', contacts=results)
 
+@app.route('/search', methods=['GET', 'POST'])
+def search_filter():
+    if request.method == 'POST':
+        # filter_fname = AddressBookModel.query.filter(AddressBookModel.first_name.ilike())
+        query = AddressBookModel.query
+        filter_fname = request.form.get('filter_fname')
+        query_result = query.filter(AddressBookModel.first_name == filter_fname)
+
+        return render_template('index.html', contacts=query_result)
+
 
 @app.route('/insert', methods=['POST'])
 def insert():
@@ -87,5 +97,4 @@ def update():
 
 
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host="0.0.0.0")
+    app.run(debug=False, host='0.0.0.0')
